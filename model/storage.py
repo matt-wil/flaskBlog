@@ -37,6 +37,11 @@ def save_data(post, filename=file_path):
     return "Data Successfully Saved"
 
 
-
+def get_post_by_id(post_id, blog_posts):
+    """Retrieves a certain post by the post id from the list of blog_posts"""
+    for post in blog_posts:
+        if post.get('id') == post_id:
+            return post
+    return None
 
 

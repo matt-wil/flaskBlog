@@ -1,20 +1,14 @@
 [
     {
-        "id": 1,
-        "author": "John Doe",
-        "title": "First Post",
-        "content": "This is my first post."
+        "id": 3,
+        "author": "Matt",
+        "title": "The Updated Post",
+        "content": "Well i think i finally got the update to work!!"
     },
     {
         "id": 2,
-        "author": "Jane Doe",
-        "title": "Second Post",
-        "content": "This is another post."
-    },
-    {
-        "id": 3,
         "author": "Matt",
-        "title": "Does it work?",
-        "content": "Checking...."
+        "title": "Welcome",
+        "content": "Hello there!\r\nWelcome to my very first blog website created with Flask!"
     }
 ]

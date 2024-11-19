@@ -25,3 +25,9 @@ h1 {
 .post p {
     margin: 10px 0;
 }
+
+.post-buttons {
+    display: flex;
+    gap: 10px;
+    margin.top: 10px;
+}
