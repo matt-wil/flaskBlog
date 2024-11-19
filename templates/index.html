@@ -14,6 +14,7 @@
                 <h2>{{ items.get('title') }}</h2>
                 <p><em>Written by {{ items.get('author') }}</em></p>
                 <p>{{ items.get('content') }}</p>
+                <a href="/delete"><button>Delete Post</button></a>
             </div>
     {% endfor %}
 </body>
