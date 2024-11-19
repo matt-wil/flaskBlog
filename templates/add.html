@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Blog Post</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Add Blog</h1>
+    <section>
+        <form action='/' method='GET'>
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" name="title" placeholder="Enter the blog title" required>
+            <br><br>
+
+            <label for="author">Author:</label><br>
+            <input type="text" id="author" name="author" placeholder="Author's name" required>
+            <br><br>
+
+            <label for="content">Content:</label><br>
+            <textarea rows="20" cols="100" id="content" name="content" placeholder="Write your blog here..." required></textarea>
+            <br><br>
+
+            <input type="submit" value="Post">
+        </form>
+    </section>
+</body>
+</html>
+
+
