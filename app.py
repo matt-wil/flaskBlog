@@ -24,9 +24,9 @@ def add():
 
         # generate ID
         now = datetime.now()
-        nanoseconds = int(now.timestamp() * 10**9)
-        random_num = randint(1, 100000000)
-        new_id = nanoseconds + random_num
+        second_stamp = int(now.timestamp() * 10)
+        random_num = randint(1, 10000)
+        new_id = str(second_stamp) + str(random_num)
 
         # create new blog post
         new_post = {
@@ -46,7 +46,7 @@ def add():
     return render_template('add.html')
 
 
-@app.route('/delete/<int:post_id>', methods=['POST'])
+@app.route('/delete/<post_id>', methods=['POST'])
 def delete(post_id):
     blog_posts = read_data()
     # remove post
@@ -55,7 +55,7 @@ def delete(post_id):
     return redirect(url_for('index'))
 
 
-@app.route('/update/<int:post_id>', methods=['GET', 'POST'])
+@app.route('/update/<post_id>', methods=['GET', 'POST'])
 def update(post_id):
     blog_posts = read_data()
     post = get_post_by_id(post_id, blog_posts)
@@ -71,7 +71,7 @@ def update(post_id):
     return render_template('update.html', post=post)
 
 
-@app.route('/like/<int:post_id>', methods=['POST'])
+@app.route('/like/<post_id>', methods=['POST'])
 def like(post_id):
     blog_posts = read_data()
     post = get_post_by_id(post_id, blog_posts)
@@ -79,11 +79,12 @@ def like(post_id):
     if post:
         post['like'] += 1
         save_data(blog_posts)
+        return jsonify({'success': True, 'likes': post['like']})
 
-    return redirect(url_for('index'))
+    return jsonify({'success': False, 'message': 'Post not found'}), 404
 
 
-@app.route('/dislike/<int:post_id>', methods=['POST'])
+@app.route('/dislike/<post_id>', methods=['POST'])
 def dislike(post_id):
     blog_posts = read_data()
     post = get_post_by_id(post_id, blog_posts)
@@ -91,8 +92,9 @@ def dislike(post_id):
     if post:
         post['dislike'] += 1
         save_data(blog_posts)
+        return jsonify({'success': True, 'dislikes': post['dislike']})
 
-    return redirect(url_for('index'))
+    return jsonify({'success': False, 'message': 'Post not found'}), 404
 
 
 if __name__ == '__main__':

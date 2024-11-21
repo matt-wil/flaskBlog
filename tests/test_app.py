@@ -47,3 +47,14 @@ def test_delete_route(client):
 def test_update_route(client):
     pass
 
+
+def test_like_route(client):
+    pass
+
+
+def test_dislike_route(client):
+    pass
+
+
+
+

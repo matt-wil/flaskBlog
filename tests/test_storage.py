@@ -1,4 +1,5 @@
 import os.path
+
 import pytest
 from flaskBlog.model.storage import read_data, save_data
 

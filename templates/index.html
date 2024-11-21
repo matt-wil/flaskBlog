@@ -24,24 +24,49 @@
                             </a>
                         </div>
                         <div class="like-dislike">
-                            <form action="{{ url_for('like', post_id=items.get('id')) }}" method="POST" >
-                                <a>
-                                    <button type="submit">
-                                        <img src="static/assets/heart-solid.svg" alt="Heart Icon"> {{ items.get('like') }}
-                                    </button>
-                                </a>
-                            </form>
-                            <form action="{{ url_for('dislike', post_id=items.get('id')) }}" method="POST" >
-                                <a>
-                                    <button type="submit">
-                                        <img src="static/assets/heart-crack-solid.svg" alt="Broken Heart Icon"> {{ items.get('dislike') }}
-                                    </button>
-                                </a>
-                            </form>
+                            <div id="post-{{ items.get('id') }}">
+                                <!-- Like Button -->
+                                <button onclick="handleLike({{ items.get('id') }})">
+                                    <img src="{{ url_for('static', filename='assets/heart-solid.svg') }}" alt="Heart Icon">
+                                    <span id="like-count-{{ items.get('id') }}">{{ items.like }}</span>
+                                </button>
+
+                                <!-- Dislike Button -->
+                                <button onclick="handleDislike({{ items.get('id') }})">
+                                    <img src="{{ url_for('static', filename='assets/heart-crack-solid.svg') }}" alt="Broken Heart Icon">
+                                    <span id="dislike-count-{{ items.get('id') }}">{{ items.dislike }}</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
         {% endfor %}
+    <!-- JavaScript async so the likes and dislikes update without refreshing the page and taking you to the top -->
+<script>
+    async function handleLike(postId) {
+        const response = await fetch(`/like/${postId}`, { method: 'POST' });
+        const data = await response.json();
+
+        if (data.success) {
+            // Update the like count in the UI
+            document.getElementById(`like-count-${postId}`).textContent = data.likes;
+        } else {
+            console.error(data.message);
+        }
+    }
+
+    async function handleDislike(postId) {
+        const response = await fetch(`/dislike/${postId}`, { method: 'POST' });
+        const data = await response.json();
+
+        if (data.success) {
+            // Update the dislike count in the UI
+            document.getElementById(`dislike-count-${postId}`).textContent = data.dislikes;
+        } else {
+            console.error(data.message);
+        }
+    }
+</script>
 </body>
 </html>
 
