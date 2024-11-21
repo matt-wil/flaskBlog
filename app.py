@@ -1,5 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from model.storage import read_data, save_data, get_post_by_id
+from datetime import datetime
+from random import randint
 app = Flask(__name__)
 
 
@@ -21,7 +23,10 @@ def add():
         blog_posts = read_data()
 
         # generate ID
-        new_id = len(blog_posts) + 1
+        now = datetime.now()
+        nanoseconds = int(now.timestamp() * 10**9)
+        random_num = randint(1, 100000000)
+        new_id = nanoseconds + random_num
 
         # create new blog post
         new_post = {
@@ -29,6 +34,8 @@ def add():
             'author': author,
             'title': title,
             'content': content,
+            'like': 0,
+            'dislike': 0
         }
 
         # append new post then save to JSON
@@ -62,6 +69,30 @@ def update(post_id):
         save_data(blog_posts)
         return redirect(url_for('index'))
     return render_template('update.html', post=post)
+
+
+@app.route('/like/<int:post_id>', methods=['POST'])
+def like(post_id):
+    blog_posts = read_data()
+    post = get_post_by_id(post_id, blog_posts)
+
+    if post:
+        post['like'] += 1
+        save_data(blog_posts)
+
+    return redirect(url_for('index'))
+
+
+@app.route('/dislike/<int:post_id>', methods=['POST'])
+def dislike(post_id):
+    blog_posts = read_data()
+    post = get_post_by_id(post_id, blog_posts)
+
+    if post:
+        post['dislike'] += 1
+        save_data(blog_posts)
+
+    return redirect(url_for('index'))
 
 
 if __name__ == '__main__':

@@ -26,8 +26,38 @@ h1 {
     margin: 10px 0;
 }
 
+.post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
 .post-buttons {
     display: flex;
     gap: 10px;
-    margin.top: 10px;
+}
+
+.like-dislike {
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.like-dislike,
+.post-buttons {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: transparent;
+    border: 1px solid #DDD;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #333
+}
+
+.like-dislike button img {
+    width: 16px;
+    height: 16px;
 }

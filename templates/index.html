@@ -14,13 +14,31 @@
                     <h2>{{ items.get('title') }}</h2>
                     <p><em>Written by {{ items.get('author') }}</em></p>
                     <p>{{ items.get('content') }}</p>
-                    <div class="post-buttons">
-                        <form action="{{ url_for('delete', post_id=items.get('id')) }}" method="POST">
-                            <button type="submit">Delete Post</button>
-                        </form>
-                        <a href="{{ url_for('update', post_id=items.get('id')) }}">
-                            <button type="submit">Update Post</button>
-                        </a>
+                    <div class="post-footer">
+                        <div class="post-buttons">
+                            <form action="{{ url_for('delete', post_id=items.get('id')) }}" method="POST">
+                                <button type="submit">Delete Post</button>
+                            </form>
+                            <a href="{{ url_for('update', post_id=items.get('id')) }}">
+                                <button type="submit">Update Post</button>
+                            </a>
+                        </div>
+                        <div class="like-dislike">
+                            <form action="{{ url_for('like', post_id=items.get('id')) }}" method="POST" >
+                                <a>
+                                    <button type="submit">
+                                        <img src="static/assets/heart-solid.svg" alt="Heart Icon"> {{ items.get('like') }}
+                                    </button>
+                                </a>
+                            </form>
+                            <form action="{{ url_for('dislike', post_id=items.get('id')) }}" method="POST" >
+                                <a>
+                                    <button type="submit">
+                                        <img src="static/assets/heart-crack-solid.svg" alt="Broken Heart Icon"> {{ items.get('dislike') }}
+                                    </button>
+                                </a>
+                            </form>
+                        </div>
                     </div>
                 </div>
         {% endfor %}

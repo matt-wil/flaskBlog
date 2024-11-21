@@ -1,14 +1,58 @@
 [
     {
-        "id": 3,
-        "author": "Matt",
-        "title": "The Updated Post",
-        "content": "Well i think i finally got the update to work!!"
-    },
-    {
         "id": 2,
         "author": "Matt",
         "title": "Welcome",
-        "content": "Hello there!\r\nWelcome to my very first blog website created with Flask!"
+        "content": "Hello there!\r\nWelcome to my very first blog website created with Flask!",
+        "like": 42,
+        "dislike": 15
+    },
+    {
+        "id": 4,
+        "author": "matt",
+        "title": "test 2",
+        "content": "testing...",
+        "like": 13,
+        "dislike": 1
+    },
+    {
+        "id": 5,
+        "author": "Matt",
+        "title": "Test 3 ",
+        "content": "Testing again...",
+        "like": 8,
+        "dislike": 4
+    },
+    {
+        "id": 6,
+        "author": "Matt",
+        "title": "Test 4",
+        "content": "Testing again and again",
+        "like": 2,
+        "dislike": 1
+    },
+    {
+        "id": 7,
+        "author": "Matt",
+        "title": "Generate ID Bug",
+        "content": "so new_id = len(blog_posts) + 1 doesnt work so well",
+        "like": 2,
+        "dislike": 0
+    },
+    {
+        "id": 1732175372549775849,
+        "author": "Matt",
+        "title": "ID bug fixed",
+        "content": "I've fixed the ID bug by adding nanoseconds and a random integer! The chance of that being the same twice is Slim! I hope. :)",
+        "like": 11,
+        "dislike": 0
+    },
+    {
+        "id": 1732181550661062530,
+        "author": "Matt",
+        "title": "Annoying like and dislike Refresh",
+        "content": "I have a problem with scrolling down to the bottom of the page clicking like or dislike and it refreshes my page and brings me back to the top. we are going to fix this!!\r\n",
+        "like": 2,
+        "dislike": 0
     }
 ]
