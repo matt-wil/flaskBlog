@@ -7,12 +7,24 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    """
+    Index route to display all blog posts (main/home page)
+    Fetches all blog posts from the storage and renders them on the index page
+    :return: Rendered index.html with list of blog posts
+    """
     blog_posts = read_data()
     return render_template('index.html', posts=blog_posts)
 
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
+    """
+    Add new blog post route.
+    Handles both GET and POST requests:
+    - GET: Displays the form for adding a new blog post
+    - POST: Receives the form data, generates a new ID and add the post to the storage.json file
+    :return: Redirect to index.html page on success or render the add.html page
+    """
     if request.method == 'POST':
         # get form data
         author = request.form.get('author')
@@ -48,6 +60,11 @@ def add():
 
 @app.route('/delete/<post_id>', methods=['POST'])
 def delete(post_id):
+    """
+    Delete a blog post via its ID number
+    :param post_id: ID of the blog post to delete
+    :return: Redirect to the index page after deletion
+    """
     blog_posts = read_data()
     # remove post
     blog_posts = [post for post in blog_posts if post.get('id') != post_id]
@@ -57,6 +74,14 @@ def delete(post_id):
 
 @app.route('/update/<post_id>', methods=['GET', 'POST'])
 def update(post_id):
+    """
+    Update an existing blog post by its ID
+    Handles both GET and POST requests
+    - GET: Displays the current post in a form for editing
+    - POST: Updates the post and saves in storage
+    :param post_id: ID number of the blog post to update
+    :return: Redirect to index.html upon success or renders the update.html
+    """
     blog_posts = read_data()
     post = get_post_by_id(post_id, blog_posts)
     if not post:
@@ -73,6 +98,11 @@ def update(post_id):
 
 @app.route('/like/<post_id>', methods=['POST'])
 def like(post_id):
+    """
+    Increases the 'like' count for the post via the ID give and returns the updated count
+    :param post_id: ID of the blog post
+    :return: JSON response with success status and like count
+    """
     blog_posts = read_data()
     post = get_post_by_id(post_id, blog_posts)
 
@@ -86,6 +116,11 @@ def like(post_id):
 
 @app.route('/dislike/<post_id>', methods=['POST'])
 def dislike(post_id):
+    """
+    Increases the 'dislike' count for the post via the ID give and returns the updated count
+    :param post_id: ID of the blog post
+    :return: JSON response with success status and dislike count
+    """
     blog_posts = read_data()
     post = get_post_by_id(post_id, blog_posts)
 
